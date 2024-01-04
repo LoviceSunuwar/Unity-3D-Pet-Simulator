@@ -22,6 +22,11 @@ public class SimpleTouchToMove : MonoBehaviour
 
     public float gravity = 9.8f; // We are providing a basic gravity, since our 3D world pet has the ability to jump ( Y Axis )
 
+    public float jumpForce = 3.0f;
+
+    public float stopForce = 2f;
+
+    public Animator petAnimator;
 
     void Update()
     {
@@ -77,10 +82,34 @@ public class SimpleTouchToMove : MonoBehaviour
         } else
         {
             canMove = false;
-            moveDirection = Vector3.zero; // So, that there are no movement
+            //moveDirection = Vector3.zero; // So, that there are no movement// Commenting this because the character cannot jump since after the user stops touching the screen then the vector3 is set to zero hence unable to jump.
+
+            moveDirection = Vector3.Lerp(moveDirection, Vector3.zero, Time.deltaTime * stopForce); // Lerp allows us to transit between a state A and State B)
+
         }
 
+        // Animation integration
+
+        petAnimator.SetBool("canWalk", canMove); // Here, we are accesing the Animtor on unity, Using setBool which takes in 2 poaramenters, first is the name of the parameter and second is what we want to assign to the parameter
+        // here canWalk is a parameter, we created on the animator and we are assinging the canMove bool that we hhave so that the pet moves when the player moves animtion
+
+
+        // Jump integration
+
+        // -> while gettouch is a way to get input of the user, while mouse click is also a touch input since unity understands that it is a touch interface.
+
+        if(Input.GetMouseButtonUp(0) && petController.isGrounded)
+            // Here input.getmousebuttonup is when the user releases the cick and (0) definign the which side of the mouse it is.
+            // While getmousebuttondown would be clicking on the mouse, for example you could make it shoot.
+        {
+            moveDirection.y += jumpForce;
+            // This is just a effect to jump
+            moveDirection += transform.forward;
+        }
+
+
         // Calculation of gravity
+
 
         moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
 
