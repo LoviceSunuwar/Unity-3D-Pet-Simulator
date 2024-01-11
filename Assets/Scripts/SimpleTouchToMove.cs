@@ -28,6 +28,9 @@ public class SimpleTouchToMove : MonoBehaviour
 
     public Animator petAnimator;
 
+    public GameObject jumpeffect;
+
+
     void Update()
     {
         if (Input.touchCount > 0 ) // Chcek if there is a input. 
@@ -75,8 +78,9 @@ public class SimpleTouchToMove : MonoBehaviour
 
                 // applying the rotation
                 transform.rotation = targetRotation;
-
-                moveDirection = moveDirection * petSpeed;
+                // Normalized makes the vector one unit,
+                // in order to have a constant run speed on the game 
+                moveDirection = moveDirection.normalized * petSpeed;
             }
 
         } else
@@ -102,9 +106,10 @@ public class SimpleTouchToMove : MonoBehaviour
             // Here input.getmousebuttonup is when the user releases the cick and (0) definign the which side of the mouse it is.
             // While getmousebuttondown would be clicking on the mouse, for example you could make it shoot.
         {
+            Instantiate(jumpeffect, transform.position, Quaternion.identity);
             moveDirection.y += jumpForce;
             // This is just a effect to jump
-            moveDirection += transform.forward;
+            //moveDirection += transform.forward;
         }
 
 
