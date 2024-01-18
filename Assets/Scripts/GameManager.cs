@@ -10,12 +10,19 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        for(int i =0; i < rooms.Length; i++)
+        for (int i = 0; i < rooms.Length; i++)
         {
-            if (i <= level)
+            if (i < level)
             {
-                rooms[i - 1].SetActive(true);  // i will take all the values of level that we have created
+                rooms[i].SetActive(true);
+            }
+            else
+            {
+                rooms[i].SetActive(false);
             }
         }
     }
+
+
+
 }
