@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool isGameStarted = false;
+
     public int level = 1;
 
     public GameObject[] rooms;
+
+    public GameObject[] tutorial;
 
     private void Awake()
     {
@@ -23,6 +27,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    private void Update()
+    {
+        if (Input.GetMouseButton(0) && !isGameStarted)
+        {
+            isGameStarted = true;
+            tutorial[0].SetActive(false);
+        }
+    }
 
 }
