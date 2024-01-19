@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SimpleTouchToMove : MonoBehaviour
 {
+
+    //public GameManager foxyGM;
     Touch touch;
     // To know where the player finger is to move the character in the game
 
