@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        timerFull = 5; // manually defining the value forcing so that we are not efffected by oncoming bugs
+        timerFull = 30; // manually defining the value forcing so that we are not efffected by oncoming bugs
         for (int i = 0; i < rooms.Length; i++)
         {
             if (i < level)
