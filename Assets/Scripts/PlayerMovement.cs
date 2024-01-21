@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerspeed;
     public float posXmin;
     public float posXmax;
+
  
 
     // Update is called once per frame
