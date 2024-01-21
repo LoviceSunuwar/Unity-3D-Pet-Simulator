@@ -40,13 +40,22 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && !isGameStarted)
-        {
-            isGameStarted = true;
-            tutorial[0].SetActive(false);
-            InvokeRepeating("SetTimer", 1, 1);
+        // This function allows the user to start the game whne the screen is touched.
+        //if (Input.GetMouseButton(0) && !isGameStarted)
+        //{
+        //    isGameStarted = true;
+        //    tutorial[0].SetActive(false);
+        //    InvokeRepeating("SetTimer", 1, 1);
 
-        }
+        //}
+    }
+
+    public void startGame()
+    {
+        isGameStarted = true;
+        tutorial[0].SetActive(false);
+        InvokeRepeating("SetTimer", 1, 1);
+
     }
 
     public void SetTimer()
@@ -68,5 +77,22 @@ public class GameManager : MonoBehaviour
         Application.LoadLevel(Application.loadedLevelName); // This allows to load the level , in this case last one that was loaded.
 
     }
+    public void WatchAds()
+    {
+        // TODO: Show the video ads.
+        // TODO: Detect ads scene
+        GetExtraTime();
+    }
+
+    public void GetExtraTime()
+    {
+        timerFull = 10;
+        textscore.text = timerFull.ToString();
+        InvokeRepeating("SetTimer", 1, 1);
+        isGameEnded = false;
+        ScreenEnd.SetActive(false);
+    }
+
+   
 
 }
