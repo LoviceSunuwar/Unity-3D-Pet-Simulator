@@ -32,13 +32,21 @@ public class SimpleTouchToMove : MonoBehaviour
 
     public GameObject jumpeffect;
 
-
     public GameManager gameManager;
+
+
+    private void Awake()
+    {
+        float bonusSpeed = 0.1f * PlayerPrefs.GetInt("speedLevel", 1);
+        petSpeed = petSpeed + bonusSpeed;
+    }
 
 
     void Update()
     {
-        if (Input.touchCount > 0 ) // Chcek if there is a input. 
+        if (!gameManager.isGameEnded && gameManager.isGameStarted)
+        {
+            if (Input.touchCount > 0 ) // Chcek if there is a input. 
         {
             canMove = true;
 
@@ -124,10 +132,9 @@ public class SimpleTouchToMove : MonoBehaviour
         moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
 
         // Character controller move takes in the direction wher we want to move
-       if (!gameManager.isGameEnded && gameManager.isGameStarted)
-        {
+       
             petController.Move(moveDirection * Time.deltaTime); // Character movement is to be applied only if the game is started
-            canMove = false;
+            
         }
     }
 }

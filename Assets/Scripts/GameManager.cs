@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void GetExtraTime()
     {
-        timerFull = 10;
+        timerFull = 10 + PlayerPrefs.GetInt("timerLevel", 1);
         textTimer.text = timerFull.ToString();
         InvokeRepeating("SetTimer", 1, 1);
         isGameEnded = false;
