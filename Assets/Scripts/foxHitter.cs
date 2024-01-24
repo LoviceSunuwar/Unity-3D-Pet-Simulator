@@ -22,7 +22,10 @@ public class FoxHitter : MonoBehaviour
             // so that we have the access to the rigidbody properties of the tagged name hitted or hittable or what we interac with.
             HittableObjects ho = hit.gameObject.GetComponent<HittableObjects>();
             HitEffect(obj_rb, hit);
-            
+            Score3DEffect(ho);
+            GetCoins(ho);
+
+
         }
     }
 
@@ -48,4 +51,18 @@ public class FoxHitter : MonoBehaviour
     {
         foxScore3D.text = "";
     }
+
+    public void GetCoins(HittableObjects ho)
+    {
+        int actualCoins = PlayerPrefs.GetInt("nbCoins", 0);
+        if(actualCoins + ho.coins > 9999999)
+        {
+            PlayerPrefs.SetInt("nbCoins", 9999999);
+        } else
+        {
+            PlayerPrefs.SetInt("nbCoins", actualCoins + ho.coins);
+        }
+        
+    }
+
 }
