@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         tutorial[0].SetActive(false);
+        tutorial[1].SetActive(true);
         InvokeRepeating("SetTimer", 1, 1);
 
     }

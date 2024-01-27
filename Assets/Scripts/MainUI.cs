@@ -5,8 +5,8 @@ using TMPro;
 public class MainUI : MonoBehaviour
 {
     public TextMeshProUGUI nbCoinsText;
-    public TextMeshProUGUI nbSpeedText;
-    public TextMeshProUGUI nbTimerText;
+    //public TextMeshProUGUI nbSpeedText;
+    //public TextMeshProUGUI nbTimerText;
     public int playerNbCoins;
     int binCoins;
     int binSpeed;
@@ -24,6 +24,8 @@ public class MainUI : MonoBehaviour
 
     private void Awake()
     {
+        playerNbCoins = PlayerPrefs.GetInt("nbCoins", 0);
+        nbCoinsText.text = playerNbCoins.ToString();
         onAwakeCoinLevel();
         onAwakeSpeedLevel();
         onAwakeTimerLevel();
@@ -31,12 +33,11 @@ public class MainUI : MonoBehaviour
 
     public void onAwakeCoinLevel()
     {
-        playerNbCoins = PlayerPrefs.GetInt("nbCoins", 0);
-        nbCoinsText.text = playerNbCoins.ToString();
         binCoins = PlayerPrefs.GetInt("coinsLevel", 1);
         coinsActualPrice = intialPrice * binCoins;
         coinsPriceText.text = coinsActualPrice + "PO";
         coinsLevelText.text = "LEVEL " + PlayerPrefs.GetInt("coinsLevel", 1);
+
     }
 
 
@@ -57,11 +58,9 @@ public class MainUI : MonoBehaviour
 
     public void onAwakeSpeedLevel()
     {
-        playerNbCoins = PlayerPrefs.GetInt("nbCoins", 0);
-        nbSpeedText.text = playerNbCoins.ToString();
         binSpeed = PlayerPrefs.GetInt("speedLevel", 1);
         speedActualPrice = intialPrice * binSpeed;
-        speedPriceText.text = speedPriceText + "PO";
+        speedPriceText.text = speedActualPrice + "PO";
         speedLevelText.text = "LEVEL " + PlayerPrefs.GetInt("speedLevel", 1);
     }
 
@@ -83,11 +82,9 @@ public class MainUI : MonoBehaviour
 
     public void onAwakeTimerLevel()
     {
-        playerNbCoins = PlayerPrefs.GetInt("nbCoins", 0);
-        nbSpeedText.text = playerNbCoins.ToString();
         binTimer = PlayerPrefs.GetInt("timerLevel", 1);
-        speedActualPrice = intialPrice * binTimer;
-        timerPriceText.text = speedPriceText + "PO";
+        timerActualPrice = intialPrice * binTimer;
+        timerPriceText.text = timerActualPrice + "PO";
         timerLevelText.text = "LEVEL " + PlayerPrefs.GetInt("timerLevel", 1);
     }
 
@@ -103,7 +100,7 @@ public class MainUI : MonoBehaviour
             binTimer = PlayerPrefs.GetInt("timerLevel", 1);
             timerLevelText.text = "LEVEL " + PlayerPrefs.GetInt("timerLevel", 1);
             timerActualPrice = intialPrice * binTimer;
-            timerPriceText.text = speedActualPrice + "PO";
+            timerPriceText.text = timerActualPrice + "PO";
         }
     }
 }
